@@ -4,4 +4,4 @@ def print_list_integer(my_list=[]):
     This function prints all integers of a list.
     """
     for i in my_list:
-        print(i)
+        print("{}".format(i))
