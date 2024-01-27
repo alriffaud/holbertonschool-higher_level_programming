@@ -1,6 +1,6 @@
 #!/usr/bin/python3
-exec("import sys")
 from calculator_1 import add, sub, mul, div
+exec("import sys")
 if __name__ == "__main__":
     argc = len(sys.argv) - 1
     if argc != 3:
