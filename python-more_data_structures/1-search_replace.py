@@ -4,7 +4,7 @@ def search_replace(my_list, search, replace):
     This function replaces all occurrences of an element by another in a new
     list.
     """
-    if my_list == []:
+    if not my_list:
         return (None)
     new_list = []
     for i in my_list:
