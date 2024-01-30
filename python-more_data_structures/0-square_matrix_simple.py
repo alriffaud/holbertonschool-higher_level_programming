@@ -17,6 +17,8 @@ def square_matrix_simple(matrix=[]):
     """
     This function computes the square value of all integers of a matrix.
     """
+    if matrix == []:
+        return (None)
     new_matrix = copy_matrix(matrix)
     m = len(new_matrix)
     for row in range(m):
