@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-"""In this module, a Square class is defined."""
+"""
+In this module, a Square class is defined.
+"""
 
 
 class Square:
