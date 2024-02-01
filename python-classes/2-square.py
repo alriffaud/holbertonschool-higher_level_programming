@@ -15,7 +15,7 @@ class Square:
         """
         This is the initialization method.
         Parameters:
-        - size: This is the size of the square.
+          - size: This is the size of the square.
         """
         if type(size) != int:
             raise TypeError("size must be an integer")
