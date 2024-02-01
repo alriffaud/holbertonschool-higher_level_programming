@@ -1,7 +1,5 @@
 #!/usr/bin/python3
-"""
-In this module, a Square class is defined.
-"""
+"""In this module, a Square class is defined."""
 
 
 class Square:
@@ -10,9 +8,10 @@ class Square:
     Attributes:
     - __size: This is the size of the square.
     """
+
     def __init__(self, size=0):
         """
-        This is the initialization method
+        This is the initialization method.
         Parameters:
         - size: This is the size of the square.
         """
