@@ -14,6 +14,9 @@ Numbers
 >>> add_integer(2, 3)
 5
 
+add_integer(2,)
+100
+
 >>> add_integer(2, 0)
 2
 
