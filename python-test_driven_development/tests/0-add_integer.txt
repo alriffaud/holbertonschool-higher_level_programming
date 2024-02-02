@@ -14,8 +14,14 @@ Numbers
 >>> add_integer(2, 3)
 5
 
+>>> add_integer(2, 0)
+2
+
 >>> add_integer(-2.3, 4.5)
 2
+
+>>> add_integer(-0.3, 4)
+4
 
 Non-Numbers
 ===========
@@ -26,6 +32,21 @@ Traceback (most recent call last):
 TypeError: a must be an integer
 
 >>> add_integer(4, "hola")
+Traceback (most recent call last):
+...
+TypeError: b must be an integer
+
+>>> add_integer(None)
+Traceback (most recent call last):
+...
+TypeError: a must be an integer
+
+>>> add_integer(None, 5)
+Traceback (most recent call last):
+...
+TypeError: a must be an integer
+
+>>> add_integer(2, None)
 Traceback (most recent call last):
 ...
 TypeError: b must be an integer
