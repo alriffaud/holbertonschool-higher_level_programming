@@ -9,6 +9,7 @@ First we import ``print_square`` from the ``4-print_square`` module:
 Now use it:
 
 >>> print_square(0)# doctest: +NORMALIZE_WHITESPACE
+
 >>> print_square(1)
 #
 
@@ -74,3 +75,8 @@ TypeError: size must be an integer
 Traceback (most recent call last):
 ...
 TypeError: print_square() missing 1 required positional argument: 'size'
+
+>>> print_square('2')
+Traceback (most recent call last):
+...
+TypeError: size must be an integer
