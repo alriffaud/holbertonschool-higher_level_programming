@@ -1,0 +1,71 @@
+=====================
+Using ``print_square``
+=====================
+
+First we import ``print_square`` from the ``4-print_square`` module:
+
+>>> print_square = __import__('4-print_square').print_square
+
+Now use it:
+
+>>> print_square(0)# doctest: +NORMALIZE_WHITESPACE
+>>> print_square(1)
+#
+
+>>> print_square(4)
+####
+####
+####
+####
+
+>>> print_square(10)
+##########
+##########
+##########
+##########
+##########
+##########
+##########
+##########
+##########
+##########
+
+>>> print_square(None)
+Traceback (most recent call last):
+...
+TypeError: size must be an integer
+
+>>> print_square(2.5)
+Traceback (most recent call last):
+...
+TypeError: size must be an integer
+
+>>> print_square(-2.5)
+Traceback (most recent call last):
+...
+TypeError: size must be an integer
+
+>>> print_square(-2)
+Traceback (most recent call last):
+...
+ValueError: size must be >= 0
+
+>>> print_square(float('inf'))
+Traceback (most recent call last):
+...
+TypeError: size must be an integer
+
+>>> print_square(float('-inf'))
+Traceback (most recent call last):
+...
+TypeError: size must be an integer
+
+>>> print_square(float('nan'))
+Traceback (most recent call last):
+...
+TypeError: size must be an integer
+
+>>> print_square("hola")
+Traceback (most recent call last):
+...
+TypeError: size must be an integer
