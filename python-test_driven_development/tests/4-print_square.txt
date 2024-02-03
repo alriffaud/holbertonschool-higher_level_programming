@@ -9,7 +9,6 @@ First we import ``print_square`` from the ``4-print_square`` module:
 Now use it:
 
 >>> print_square(0)
-
 >>> print_square(1)
 #
 
