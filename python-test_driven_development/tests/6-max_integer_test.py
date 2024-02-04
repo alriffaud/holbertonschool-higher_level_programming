@@ -17,6 +17,7 @@ class TestMaxInteger(unittest.TestCase):
         list = [1, 2, 3, 4]
         max = max_integer(list=list)
         self.assertEqual(max, 4)
+        self.assertEqual(max_integer([1]), 1)
 
     def test_max_integer_floats_list(self):
         """
