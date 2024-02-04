@@ -18,6 +18,8 @@ class TestMaxInteger(unittest.TestCase):
         max = max_integer(list=list)
         self.assertEqual(max, 4)
         self.assertEqual(max_integer([1]), 1)
+        self.assertEqual(max_integer([1, 1]), 1)
+        self.assertEqual(max_integer([1, -1]), 1)
 
     def test_max_integer_floats_list(self):
         """
@@ -27,6 +29,10 @@ class TestMaxInteger(unittest.TestCase):
         list = [1.5, 5.4, 13.7, 4.8]
         max = max_integer(list=list)
         self.assertEqual(max, 13.7)
+        self.assertEqual(max_integer([1.5, -1.4]), 1.5)
+        self.assertEqual(max_integer([1.5, float('-inf')]), 1.5)
+        self.assertEqual(max_integer([1.5, float('inf')]), float('inf'))
+        self.assertEqual(max_integer([1.5, float('nan')]), 1.5)
 
     def test_max_integer_string_list(self):
         """
