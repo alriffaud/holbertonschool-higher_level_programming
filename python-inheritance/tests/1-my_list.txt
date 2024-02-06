@@ -18,6 +18,10 @@ List of integers
 >>> print(my_list)
 [1, 4, 2, 3, 5]
 
+>>> my_list = MyList([15, -4, 2, 35])
+>>> my_list.print_sorted()
+[-4, 2, 15, 35]
+
 
 List not defined
 ================
