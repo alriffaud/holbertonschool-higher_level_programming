@@ -22,6 +22,10 @@ List of integers
 >>> my_list.print_sorted()
 [-4, 2, 15, 35]
 
+>>> my_list = MyList([5, 5, 5, 5])
+>>> my_list.print_sorted()
+[5, 5, 5, 5]
+
 
 List not defined
 ================
@@ -59,3 +63,10 @@ Unique Number
 >>> my_list = MyList([5])
 >>> my_list.print_sorted()
 [5]
+
+
+String
+======
+>>> my_list = MyList("hello")
+>>> my_list.print_sorted()
+['e', 'h', 'l', 'l', 'o']
