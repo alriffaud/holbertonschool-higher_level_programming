@@ -26,6 +26,10 @@ List of integers
 >>> my_list.print_sorted()
 [5, 5, 5, 5]
 
+>>> my_list = MyList([1, 2, 3, 4])
+>>> my_list.print_sorted()
+[1, 2, 3, 4]
+
 
 List not defined
 ================
@@ -38,6 +42,10 @@ NameError: name 'my_list2' is not defined
 Empty List
 ==========
 >>> my_list = MyList([])
+>>> my_list.print_sorted()
+[]
+
+>>> my_list = MyList()
 >>> my_list.print_sorted()
 []
 
