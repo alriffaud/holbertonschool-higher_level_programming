@@ -1,0 +1,60 @@
+======================
+Using ``BaseGeometry``
+======================
+
+First we import ``BaseGeometry`` class from the ``7-base_geometry`` module:
+
+>>> BaseGeometry = __import__('7-base_geometry').BaseGeometry
+>>> bg = BaseGeometry()
+
+Now use it:
+
+Integer Values
+==============
+>>> bg.integer_validator("my_int", 12)
+
+>>> bg.integer_validator("width", 89)
+
+
+Not Integer Values
+==================
+>>> bg.integer_validator("name", "John")
+Traceback (most recent call last):
+...
+TypeError: name must be an integer
+
+>>> bg.integer_validator("width", 1.2)
+Traceback (most recent call last):
+...
+TypeError: width must be an integer
+
+
+Less than 0 and equal to 0
+==========================
+>>> bg.integer_validator("age", 0)
+Traceback (most recent call last):
+...
+ValueError: age must be greater than 0
+
+>>> bg.integer_validator("distance", -4)
+Traceback (most recent call last):
+...
+ValueError: distance must be greater than 0
+
+
+Empty Argument
+==============
+>>> bg.integer_validator("age",)
+Traceback (most recent call last):
+...
+TypeError: BaseGeometry.integer_validator() missing 1 required positional argument: 'value'
+
+>>> bg.integer_validator(, 5)
+Traceback (most recent call last):
+...
+SyntaxError: invalid syntax
+
+
+Empty String
+============
+>>> bg.integer_validator("", 5)
