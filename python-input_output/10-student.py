@@ -40,8 +40,6 @@ class Student:
             for key, value in attributes.items():
                 if key in attrs and isinstance(value, types):
                     json_dict[key] = value
+            return (json_dict)
         else:
-            for key, value in attributes.items():
-                if isinstance(value, types):
-                    json_dict[key] = value
-        return (json_dict)
+            return (attributes)
