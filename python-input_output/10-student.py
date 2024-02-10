@@ -35,10 +35,9 @@ class Student:
         json_dict = {}
         attributes = self.__dict__
         types = (list, dict, str, int, bool)
-        if (attrs != [] and attrs is not None and
-                all(isinstance(item, str) for item in attrs)):
+        if attrs is not None and all(isinstance(item, str) for item in attrs):
             for key, value in attributes.items():
-                if key in attrs and isinstance(value, types):
+                if key in attrs:
                     json_dict[key] = value
             return (json_dict)
         else:
