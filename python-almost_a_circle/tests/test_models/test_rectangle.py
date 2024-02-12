@@ -25,10 +25,10 @@ class TestRectangleClass(unittest.TestCase):
         """
         with self.assertRaises(ValueError) as exc:
             Rectangle(-5, 10, 1, 2)
-        self.assertEqual(str(exc.exception), "width must be >= 0")
+        self.assertEqual(str(exc.exception), "width must be > 0")
         with self.assertRaises(ValueError) as exc:
             Rectangle(5, -10, 1, 2)
-        self.assertEqual(str(exc.exception), "height must be >= 0")
+        self.assertEqual(str(exc.exception), "height must be > 0")
         with self.assertRaises(ValueError) as exc:
             Rectangle(5, 10, -1, 2)
         self.assertEqual(str(exc.exception), "x must be >= 0")
@@ -52,7 +52,7 @@ class TestRectangleClass(unittest.TestCase):
         rect = Rectangle(5, 10)
         with self.assertRaises(ValueError) as exc:
             rect.width = -8
-        self.assertEqual(str(exc.exception), "width must be >= 0")
+        self.assertEqual(str(exc.exception), "width must be > 0")
 
     def test_height_property(self):
         """
@@ -70,7 +70,7 @@ class TestRectangleClass(unittest.TestCase):
         rect = Rectangle(5, 10)
         with self.assertRaises(ValueError) as exc:
             rect.height = -15
-        self.assertEqual(str(exc.exception), "height must be >= 0")
+        self.assertEqual(str(exc.exception), "height must be > 0")
 
     def test_x_property(self):
         """
