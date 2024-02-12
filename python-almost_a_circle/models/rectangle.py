@@ -28,11 +28,11 @@ class Rectangle(Base):
           - x: This is the x coordinate.
           - y: This is the y coordinate.
         """
-        if not isinstance(width, (int, float)):
+        if not isinstance(width, int):
             raise TypeError("width must be an integer")
         if width < 0:
             raise ValueError("width must be >= 0")
-        if not isinstance(height, (int, float)):
+        if not isinstance(height, int):
             raise TypeError("height must be an integer")
         if height < 0:
             raise ValueError("height must be >= 0")
@@ -56,7 +56,7 @@ class Rectangle(Base):
         Parameters:
           - value: It's the new width value.
         """
-        if not isinstance(value, (int, float)):
+        if not isinstance(value, int):
             raise TypeError("width must be an integer")
         if value < 0:
             raise ValueError("width must be >= 0")
@@ -76,8 +76,48 @@ class Rectangle(Base):
         Parameters:
           - value: It's the new height value.
         """
-        if not isinstance(value, (int, float)):
+        if not isinstance(value, int):
             raise TypeError("height must be an integer")
         if value < 0:
             raise ValueError("height must be >= 0")
         self.__height = value
+
+    @property
+    def x(self):
+        """
+        This method returns the x position of the rectangle.
+        """
+        return (self.__x)
+
+    @property
+    def y(self):
+        """
+        This method returns the y position of the rectangle.
+        """
+        return (self.__y)
+
+    @x.setter
+    def x(self, value):
+        """
+        This method sets the value of x.
+        Parameters:
+          - value: It's the new x value.
+        """
+        if not isinstance(value, int):
+            raise TypeError("x must be an integer")
+        if value < 0:
+            raise ValueError("x must be >= 0")
+        self.__x = value
+
+    @y.setter
+    def y(self, value):
+        """
+        This method sets the value of y.
+        Parameters:
+          - value: It's the new y value.
+        """
+        if not isinstance(value, int):
+            raise TypeError("y must be an integer")
+        if value < 0:
+            raise ValueError("y must be >= 0")
+        self.__y = value
