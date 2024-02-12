@@ -3,10 +3,15 @@
 Unittest for Rectangle class.
 """
 import unittest
+from models.base import Base
 from models.rectangle import Rectangle
 
 
 class TestRectangleClass(unittest.TestCase):
+    def setUp(self):
+        """Resets nb_objects"""
+        Base._Base__nb_objects = 0
+
     def test_init(self):
         """
         This function tests the initialization.
@@ -130,9 +135,9 @@ class TestRectangleClass(unittest.TestCase):
         rect1 = Rectangle(5, 10)
         rect2 = Rectangle(8, 15, id=42)
         rect3 = Rectangle(3, 7)
-        self.assertEqual(rect1.id, 6)
+        self.assertEqual(rect1.id, 1)
         self.assertEqual(rect2.id, 42)
-        self.assertEqual(rect3.id, 7)
+        self.assertEqual(rect3.id, 2)
 
     def test_init_with_negative_id(self):
         """
@@ -141,6 +146,56 @@ class TestRectangleClass(unittest.TestCase):
         rect = Rectangle(8, 15, id=-42)
         self.assertEqual(rect.id, -42)
 
+    def test_area_with_positive_dimensions(self):
+        """
+        This function tests area with positive width and height.
+        """
+        rect = Rectangle(5, 10)
+        self.assertEqual(rect.area(), 50)
+
+    def test_area_with_zero_dimensions(self):
+        """
+        This function tests area with width or height set to zero.
+        """
+        with self.assertRaises(ValueError) as exc:
+            rect = Rectangle(0, 10)
+            rect.area()
+        self.assertEqual(str(exc.exception), "width must be > 0")
+        with self.assertRaises(ValueError) as exc:
+            rect = Rectangle(5, 0)
+            rect.area()
+        self.assertEqual(str(exc.exception), "height must be > 0")
+        with self.assertRaises(ValueError) as exc:
+            rect = Rectangle(0, 0)
+            rect.area()
+        self.assertEqual(str(exc.exception), "width must be > 0")
+
+    def test_area_with_negative_dimensions(self):
+        """
+        This function tests area with negative width or height.
+        """
+        with self.assertRaises(ValueError) as exc:
+            rect = Rectangle(-5, 10)
+            rect.area()
+        self.assertEqual(str(exc.exception), "width must be > 0")
+        with self.assertRaises(ValueError) as exc:
+            rect = Rectangle(5, -10)
+            rect.area()
+        self.assertEqual(str(exc.exception), "height must be > 0")
+        with self.assertRaises(ValueError) as exc:
+            rect = Rectangle(-5, -10)
+            rect.area()
+        self.assertEqual(str(exc.exception), "width must be > 0")
+
+    def test_area_after_width_and_height_change(self):
+        """
+        This function tests area after changing width and height.
+        """
+        rect = Rectangle(5, 10)
+        self.assertEqual(rect.area(), 50)
+        rect.width = 8
+        rect.height = 15
+        self.assertEqual(rect.area(), 120)
 
 if __name__ == '__main__':
     unittest.main()
