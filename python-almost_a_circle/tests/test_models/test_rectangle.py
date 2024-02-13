@@ -43,6 +43,24 @@ class TestRectangleClass(unittest.TestCase):
             Rectangle(5, 10, 1, -2)
         self.assertEqual(str(exc.exception), "y must be >= 0")
 
+    def test_init_with_empty_value(self):
+        """
+        This function tests initialization with empty value.
+        """
+        with self.assertRaises(TypeError) as exc:
+            Rectangle()
+        self.assertEqual(str(exc.exception), "Rectangle.__init__() missing 2 \
+required positional arguments: 'width' and 'height'")
+
+    def test_init_with_none_value(self):
+        """
+        This function tests initialization with None value.
+        """
+        with self.assertRaises(TypeError) as exc:
+            Rectangle(None)
+        self.assertEqual(str(exc.exception), "Rectangle.__init__() missing 1 \
+required positional argument: 'height'")
+
     def test_width_property(self):
         """
         This function tests width property.
@@ -60,6 +78,14 @@ class TestRectangleClass(unittest.TestCase):
         with self.assertRaises(ValueError) as exc:
             rect.width = -8
         self.assertEqual(str(exc.exception), "width must be > 0")
+
+    def test_init_with_no_int_value(self):
+        """
+        This function tests initialization with no int value.
+        """
+        with self.assertRaises(TypeError) as exc:
+            Rectangle(2.5, 3)
+        self.assertEqual(str(exc.exception), "width must be an integer")
 
     def test_height_property(self):
         """
