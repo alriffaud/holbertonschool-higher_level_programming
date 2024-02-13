@@ -168,24 +168,18 @@ class Rectangle(Base):
         if args is not None and len(args) != 0:
             if len(args) >= 1:
                 if args[0] is not None:
-                    self.id = args[0]
+                    super().__init__(args[0])
             if len(args) > 1:
-                self.__width = args[1]
+                setattr(self, 'width', args[1])
             if len(args) > 2:
-                self.__height = args[2]
+                setattr(self, 'height', args[2])
             if len(args) > 3:
-                self.__x = args[3]
+                setattr(self, 'x', args[3])
             if len(args) > 4:
-                self.__y = args[4]
+                setattr(self, 'y', args[4])
         if kwargs is not None and len(kwargs) != 0:
             for key, value in kwargs.items():
                 if key == 'id':
-                    self.id = value
-                elif key == 'width':
-                    self.__width = value
-                elif key == 'height':
-                    self.__height = value
-                elif key == 'x':
-                    self.__x = value
-                elif key == 'y':
-                    self.__y = value
+                    super().__init__(value)
+                elif key in ['width', 'height', 'x', 'y']:
+                    setattr(self, key, value)
