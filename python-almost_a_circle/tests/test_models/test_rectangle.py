@@ -46,6 +46,20 @@ class TestRectangleClass(unittest.TestCase):
             Rectangle(5, 10, 1, -2)
         self.assertEqual(str(exc.exception), "y must be >= 0")
 
+    def test_init_with_empty_value(self):
+        """
+        This function tests initialization with empty value.
+        """
+        with self.assertRaises(TypeError):
+            Rectangle()
+
+    def test_init_with_none_value(self):
+        """
+        This function tests initialization with None value.
+        """
+        with self.assertRaises(TypeError):
+            Rectangle(None)
+
     def test_width_property(self):
         """
         This function tests width property.
