@@ -58,7 +58,6 @@ class Rectangle(Base):
         self.__x = x
         self.__y = y
         super().__init__(id)
-        self.__id = id
 
     @property
     def width(self):
@@ -160,4 +159,4 @@ class Rectangle(Base):
         This method return a string representation of the rectangle.
         """
         return ("[Rectangle] ({}) {}/{} - {}/{}".format(
-            self.__id, self.__x, self.__y, self.__width, self.__height))
+            self.id, self.__x, self.__y, self.__width, self.__height))
