@@ -256,6 +256,78 @@ class TestRectangleClass(unittest.TestCase):
         expected_str = "[Rectangle] (42) 1/2 - 5/10"
         self.assertEqual(str(rect), expected_str)
 
+    def test_update_with_args_only(self):
+        """
+        This function tests update with positional arguments only.
+        """
+        rect = Rectangle(5, 10, 1, 2, 42)
+        rect.update(23, 8, 16, 4, 5)
+        self.assertEqual(rect.id, 23)
+        self.assertEqual(rect.width, 8)
+        self.assertEqual(rect.height, 16)
+        self.assertEqual(rect.x, 4)
+        self.assertEqual(rect.y, 5)
+
+    def test_update_with_kwargs_only(self):
+        """
+        This function tests update with keyword arguments only.
+        """
+        rect = Rectangle(5, 10, 1, 2, 42)
+        rect.update(id=23, width=8, height=16, x=4, y=5)
+        self.assertEqual(rect.id, 23)
+        self.assertEqual(rect.width, 8)
+        self.assertEqual(rect.height, 16)
+        self.assertEqual(rect.x, 4)
+        self.assertEqual(rect.y, 5)
+
+    def test_update_with_args_and_kwargs(self):
+        """
+        This function tests update with both positional and keyword arguments.
+        """
+        rect = Rectangle(5, 10, 1, 2, 42)
+        rect.update(23, width=8, height=16, x=4, y=5)
+        self.assertEqual(rect.id, 23)
+        self.assertEqual(rect.width, 8)
+        self.assertEqual(rect.height, 16)
+        self.assertEqual(rect.x, 4)
+        self.assertEqual(rect.y, 5)
+
+    def test_update_without_args_and_kwargs(self):
+        """
+        This function tests update with both positional and keyword arguments.
+        """
+        rect = Rectangle(5, 10, 1, 2, 42)
+        rect.update()
+        self.assertEqual(rect.id, 42)
+        self.assertEqual(rect.width, 5)
+        self.assertEqual(rect.height, 10)
+        self.assertEqual(rect.x, 1)
+        self.assertEqual(rect.y, 2)
+
+    def test_update_with_invalid_args(self):
+        """
+        This function tests update with invalid positional arguments.
+        """
+        rect = Rectangle(5, 10, 1, 2, 42)
+        with self.assertRaises(ValueError) as exc:
+            rect.update(23, -8, 16, 4, 5)
+        self.assertEqual(str(exc.exception), "width must be > 0")
+        with self.assertRaises(ValueError) as exc:
+            rect.update(23, 8, -16, 4, 5)
+        self.assertEqual(str(exc.exception), "height must be > 0")
+
+    def test_update_with_invalid_kwargs(self):
+        """
+        This function tests update with invalid keyword arguments.
+        """
+        rect = Rectangle(5, 10, 1, 2, 42)
+        with self.assertRaises(ValueError) as exc:
+            rect.update(id=23, width=-8, height=16, x=4, y=5)
+        self.assertEqual(str(exc.exception), "width must be > 0")
+        with self.assertRaises(ValueError) as exc:
+            rect.update(id=23, width=8, height=-16, x=4, y=5)
+        self.assertEqual(str(exc.exception), "height must be > 0")
+
 
 if __name__ == '__main__':
     unittest.main()
