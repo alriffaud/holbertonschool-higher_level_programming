@@ -38,6 +38,13 @@ class TestSquareClass(unittest.TestCase):
             Square(0)
         self.assertEqual(str(exc.exception), "width must be > 0")
 
+    def test_init_with_empty_value(self):
+        """
+        This function tests initialization with empty value.
+        """
+        with self.assertRaises(TypeError):
+            Square()
+
     def test_init_with_none_value(self):
         """
         This function tests initialization with None value.
