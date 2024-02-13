@@ -5,6 +5,8 @@ Unittest for Rectangle class.
 import unittest
 from models.base import Base
 from models.rectangle import Rectangle
+import io
+import unittest.mock
 
 
 class TestRectangleClass(unittest.TestCase):
@@ -196,6 +198,64 @@ class TestRectangleClass(unittest.TestCase):
         rect.width = 8
         rect.height = 15
         self.assertEqual(rect.area(), 120)
+
+    def test_display(self):
+        """
+        This function tests display method.
+        """
+        rect = Rectangle(3, 2, 1, 2)
+        expected_output = "\n\n ###\n ###\n"
+        with unittest.mock.patch(
+                'sys.stdout', new_callable=io.StringIO) as mock_stdout:
+            rect.display()
+            self.assertEqual(mock_stdout.getvalue(), expected_output)
+
+    def test_str_representation(self):
+        """
+        This function tests __str__ method.
+        """
+        rect = Rectangle(5, 10, 1, 2, 42)
+        expected_str = "[Rectangle] (42) 1/2 - 5/10"
+        self.assertEqual(str(rect), expected_str)
+
+    def test_display_with_nonzero_dimensions(self):
+        """
+        This function tests display with non-zero width and height.
+        """
+        rect = Rectangle(3, 2)
+        expected_output = "###\n###\n"
+        with unittest.mock.patch(
+                'sys.stdout', new_callable=io.StringIO) as mock_stdout:
+            rect.display()
+            self.assertEqual(mock_stdout.getvalue(), expected_output)
+
+    def test_display_with_position(self):
+        """
+        This function tests display with x and y positions.
+        """
+        rect = Rectangle(3, 2, 1, 2)
+        expected_output = "\n\n ###\n ###\n"
+        with unittest.mock.patch(
+                'sys.stdout', new_callable=io.StringIO) as mock_stdout:
+            rect.display()
+            self.assertEqual(mock_stdout.getvalue(), expected_output)
+
+    def test_str_representation_with_default_id(self):
+        """
+        This function tests __str__ method with default id (None).
+        """
+        rect = Rectangle(5, 10)
+        expected_str = "[Rectangle] (1) 0/0 - 5/10"
+        self.assertEqual(str(rect), expected_str)
+
+    def test_str_representation_with_custom_id(self):
+        """
+        This function tests __str__ method with custom id.
+        """
+        rect = Rectangle(5, 10, 1, 2, 42)
+        expected_str = "[Rectangle] (42) 1/2 - 5/10"
+        self.assertEqual(str(rect), expected_str)
+
 
 if __name__ == '__main__':
     unittest.main()
