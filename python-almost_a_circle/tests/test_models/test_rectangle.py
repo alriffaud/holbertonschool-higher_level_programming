@@ -10,6 +10,9 @@ import unittest.mock
 
 
 class TestRectangleClass(unittest.TestCase):
+    """
+    This class tests the Rectangle class
+    """
     def setUp(self):
         """Resets nb_objects"""
         Base._Base__nb_objects = 0
