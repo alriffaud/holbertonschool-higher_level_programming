@@ -18,6 +18,15 @@ class Rectangle(Base):
     - width(self, value): This method sets the value of width.
     - height(self): This method returns the height of the rectangle.
     - height(self, value): This method sets the value of height.
+    - x(self): This method returns the x position of the rectangle.
+    - y(self): This method returns the y position of the rectangle.
+    - x(self, value): This method sets the value of x.
+    - y(self, value): This method sets the value of y.
+    - area(self): This method returns the area of the rectangle.
+    - display(self): This method prints in stdout the rectangle with the
+    character #.
+    - __str__: Is responsible for returning a string representation of the
+    rectangle.
     """
     def __init__(self, width, height, x=0, y=0, id=None):
         """
@@ -49,6 +58,7 @@ class Rectangle(Base):
         self.__x = x
         self.__y = y
         super().__init__(id)
+        self.__id = id
 
     @property
     def width(self):
@@ -144,3 +154,10 @@ class Rectangle(Base):
             print()
         for row in range(self.__height):
             print(" " * self.__x + "#" * self.__width)
+
+    def __str__(self):
+        """
+        This method return a string representation of the rectangle.
+        """
+        return ("[Rectangle] ({}) {}/{} - {}/{}".format(
+            self.__id, self.__x, self.__y, self.__width, self.__height))
