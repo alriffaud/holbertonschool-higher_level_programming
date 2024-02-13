@@ -52,8 +52,9 @@ class TestRectangleClass(unittest.TestCase):
         """
         with self.assertRaises(TypeError) as exc:
             Rectangle()
-        self.assertEqual(str(exc.exception), "Rectangle.__init__() missing 2 \
-required positional arguments: 'width' and 'height'")
+        message1 = "Rectangle.__init__() missing 2 required "
+        message = message1 + "positional arguments: 'width' and 'height'"
+        self.assertEqual(str(exc.exception), message)
 
     def test_init_with_none_value(self):
         """
@@ -61,8 +62,9 @@ required positional arguments: 'width' and 'height'")
         """
         with self.assertRaises(TypeError) as exc:
             Rectangle(None)
-        self.assertEqual(str(exc.exception), "Rectangle.__init__() missing 1 \
-required positional argument: 'height'")
+        message1 = "Rectangle.__init__() missing 1 required "
+        message = message1 + "positional argument: 'height'"
+        self.assertEqual(str(exc.exception), message)
 
     def test_width_property(self):
         """
