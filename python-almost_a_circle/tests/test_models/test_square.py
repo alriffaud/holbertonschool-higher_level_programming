@@ -8,6 +8,9 @@ from models.square import Square
 
 
 class TestSquareClass(unittest.TestCase):
+    """
+    This class tests the Square class
+    """
     def setUp(self):
         """Resets nb_objects"""
         Base._Base__nb_objects = 0
