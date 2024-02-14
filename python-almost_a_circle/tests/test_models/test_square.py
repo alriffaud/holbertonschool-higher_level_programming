@@ -77,6 +77,30 @@ class TestSquareClass(unittest.TestCase):
         square = Square(4, 2, 3, 10)
         self.assertEqual(str(square), "[Square] (10) 2/3 - 4")
 
+    def test_update_method_args(self):
+        """
+        This function tests the update method args.
+        """
+        square = Square(2, 1, 1, 1)
+        square.update(7, 3, 4, 5)
+        self.assertEqual(str(square), "[Square] (7) 4/5 - 3")
+
+    def test_update_method_kwargs(self):
+        """
+        This function tests the update method kwargs.
+        """
+        square = Square(2, 1, 1, 1)
+        square.update(id=7, size=3, x=4, y=5)
+        self.assertEqual(str(square), "[Square] (7) 4/5 - 3")
+
+    def test_update_method_mixed_args_kwargs(self):
+        """
+        This function tests the update method args and kwargs.
+        """
+        square = Square(2, 1, 1, 1)
+        square.update(7, size=3, x=4, y=5)
+        self.assertEqual(str(square), "[Square] (7) 4/5 - 3")
+
 
 if __name__ == '__main__':
     unittest.main()
