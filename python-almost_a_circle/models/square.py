@@ -71,3 +71,14 @@ class Square(Rectangle):
                     super().update(id=value)
                 elif key in ['size', 'x', 'y']:
                     setattr(self, key, value)
+
+    def to_dictionary(self):
+        """
+        This method returns the dictionary representation of a Square.
+        """
+        return {
+            'id': self.id,
+            'size': self.width,
+            'x': self.x,
+            'y': self.y
+        }
