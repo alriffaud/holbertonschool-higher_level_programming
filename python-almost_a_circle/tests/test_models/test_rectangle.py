@@ -353,6 +353,23 @@ class TestRectangleClass(unittest.TestCase):
             rect.update(id=23, width=8, height=-16, x=4, y=5)
         self.assertEqual(str(exc.exception), "height must be > 0")
 
+    def test_to_dictionary_method(self):
+        """
+        This function tests the dictionary method.
+        """
+        rectangle = Rectangle(4, 5, 2, 3, 10)
+        expected_dict = {'id': 10, 'width': 4, 'height': 5, 'x': 2, 'y': 3}
+        self.assertEqual(rectangle.to_dictionary(), expected_dict)
+
+    def test_to_dictionary_method_after_update(self):
+        """
+        This function tests the dictionary method after update.
+        """
+        rectangle = Rectangle(5, 6, 1, 2, 7)
+        rectangle.update(8, 3, 4, 5, 6)
+        expected_dict = {'id': 8, 'width': 3, 'height': 4, 'x': 5, 'y': 6}
+        self.assertEqual(rectangle.to_dictionary(), expected_dict)
+
 
 if __name__ == '__main__':
     unittest.main()
