@@ -183,3 +183,15 @@ class Rectangle(Base):
                     super().__init__(value)
                 elif key in ['width', 'height', 'x', 'y']:
                     setattr(self, key, value)
+
+    def to_dictionary(self):
+        """
+        This method returns the dictionary representation of a Rectangle.
+        """
+        return {
+            'id': self.id,
+            'width': self.width,
+            'height': self.height,
+            'x': self.x,
+            'y': self.y
+        }
