@@ -101,6 +101,23 @@ class TestSquareClass(unittest.TestCase):
         square.update(7, size=3, x=4, y=5)
         self.assertEqual(str(square), "[Square] (7) 4/5 - 3")
 
+    def test_to_dictionary_method(self):
+        """
+        This function tests the dictionary method.
+        """
+        square = Square(4, 2, 3, 10)
+        expected_dict = {'id': 10, 'size': 4, 'x': 2, 'y': 3}
+        self.assertEqual(square.to_dictionary(), expected_dict)
+
+    def test_to_dictionary_method_after_update(self):
+        """
+        This function tests the dictionary method after update.
+        """
+        square = Square(5, 1, 2, 7)
+        square.update(8, 3, 4, 5)
+        expected_dict = {'id': 8, 'size': 3, 'x': 4, 'y': 5}
+        self.assertEqual(square.to_dictionary(), expected_dict)
+
 
 if __name__ == '__main__':
     unittest.main()
