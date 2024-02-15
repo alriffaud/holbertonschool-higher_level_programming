@@ -28,6 +28,20 @@ class TestRectangleClass(unittest.TestCase):
         self.assertEqual(rect.y, 2)
         self.assertEqual(rect.id, 42)
 
+    def test_id(self):
+        """
+        Prints out the id
+        """
+        r1 = Rectangle(1, 2)
+        self.assertEqual(r1.id, 1)
+
+        r2 = Rectangle(2, 1)
+        self.assertEqual(r2.id, 2)
+
+        r3 = Rectangle(2, 3, 4, 5, 6)
+        self.assertEqual(r3.id, 6)
+        self.assertTrue(type(r3), Rectangle)
+
     def test_init_with_negative_values(self):
         """
         This function tests initialization with negative width, height, x,
@@ -59,6 +73,43 @@ class TestRectangleClass(unittest.TestCase):
         """
         with self.assertRaises(TypeError):
             Rectangle(None)
+
+    def test_one_param(self):
+        """
+        Passing only one parameter
+        """
+        with self.assertRaises(TypeError):
+            r1 = Rectangle(5)
+
+    def test_excess_param(self):
+        """Excess parameters"""
+        with self.assertRaises(TypeError):
+            r1 = Rectangle(1, 1, 1, 1, 1, 1)
+
+    def test_float(self):
+        """Float parameter"""
+        with self.assertRaises(TypeError):
+            r1 = Rectangle(1, 1.2, 1, 1, 3)
+
+    def test_NaN(self):
+        """NaN parameter"""
+        with self.assertRaises(TypeError):
+            r1 = Rectangle(1, 2, float("nan"), 1, 1)
+
+    def test_inf(self):
+        """inf parameter"""
+        with self.assertRaises(TypeError):
+            r1 = Rectangle(1, 2, float("inf"), 1, 1)
+
+    def test_unknown(self):
+        """unknown parameter"""
+        with self.assertRaises(NameError):
+            r1 = Rectangle(a)
+
+    def test_None(self):
+        """None parameter"""
+        with self.assertRaises(TypeError):
+            r1 = Rectangle(1, 2, None, 1, 1)
 
     def test_width_property(self):
         """
@@ -139,6 +190,17 @@ class TestRectangleClass(unittest.TestCase):
         with self.assertRaises(ValueError) as exc:
             rect.y = -5
         self.assertEqual(str(exc.exception), "y must be >= 0")
+
+    def test_string(self):
+        """
+        This function tests when a string is passed.
+        """
+        with self.assertRaises(TypeError):
+            r1 = Rectangle(1, "string")
+        with self.assertRaises(TypeError):
+            r1 = Rectangle("string", 1)
+        with self.assertRaises(TypeError):
+            r1 = Rectangle(1, 2, 3, "4")
 
     def test_init_with_default_id(self):
         """
