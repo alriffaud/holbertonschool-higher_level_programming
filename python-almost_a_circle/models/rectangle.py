@@ -188,8 +188,6 @@ class Rectangle(Base):
         """
         This method returns the dictionary representation of a Rectangle.
         """
-        if self is None:
-            return (None)
         return {
             'id': self.id,
             'width': self.width,
