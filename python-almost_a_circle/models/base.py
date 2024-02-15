@@ -73,12 +73,10 @@ class Base:
         """
         This method returns an instance with all attributes already set.
         """
-        from models.rectangle import Rectangle
-        from models.square import Square
         if cls.__name__ == "Rectangle":
-            instance = Rectangle(2, 3)
+            instance = cls(2, 3)
         elif cls.__name__ == "Square":
-            instance = Square(2)
+            instance = cls(2)
         else:
             raise ValueError("Unsupported class")
         instance.update(**dictionary)
