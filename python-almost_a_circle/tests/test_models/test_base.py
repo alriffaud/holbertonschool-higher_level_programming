@@ -14,12 +14,31 @@ class TestBaseClass(unittest.TestCase):
     """
         This class test the Base class.
     """
+    def setUp(self):
+        """
+        Create instances for testing.
+        """
+        Base._Base__nb_objects = 0
+        self.r1 = Rectangle(10, 7, 2, 8)
+        self.r2 = Rectangle(2, 4)
+        self.s1 = Square(10, 7, 2, 8)
+        self.s2 = Square(2)
+
+    def test_type(self):
+        """
+        Testing for instance type
+        """
+        b = Base()
+        self.assertTrue(type(b) == Base)
+
     def test_init_with_id(self):
         """
             This function tests the initialization with a specified id.
         """
         obj = Base(id=42)
         self.assertEqual(obj.id, 42)
+        obj = Base(id=2)
+        self.assertEqual(obj.id, 2)
 
     def test_init_without_id(self):
         """
@@ -58,6 +77,37 @@ class TestBaseClass(unittest.TestCase):
         self.assertEqual(obj3.id, 2)
         self.assertEqual(Base._Base__nb_objects, 2)
 
+    def test_id_string(self):
+        """Passing string"""
+        b1 = Base("string")
+        self.assertEqual(b1.id, "string")
+
+    def test_id_None(self):
+        """Passing None"""
+        Base._Base__nb_objects = 0
+        b1 = Base(None)
+        self.assertEqual(b1.id, 1)
+
+    def test_id_float(self):
+        """Passing float"""
+        b1 = Base(1.2)
+        self.assertEqual(b1.id, 1.2)
+
+    def test_id_NaN(self):
+        """Passing float"""
+        b1 = Base(float("nan"))
+        self.assertEqual(b1.id is float("nan"), False)
+
+    def test_id_inf(self):
+        """Passing inf"""
+        b1 = Base(float("inf"))
+        self.assertEqual(b1.id is float("inf"), False)
+
+    def test_unknown(self):
+        """Testing name error"""
+        with self.assertRaises(NameError):
+            Base(a)
+
     def test_to_json_string_empty_list(self):
         """
             This function tests the to_json_string method using an empty
@@ -83,24 +133,6 @@ class TestBaseClass(unittest.TestCase):
         expected_result = '[{"id": 1, "name": "object"}, '
         expected_result += '{"id": 2, "name": "item"}]'
         self.assertEqual(result, expected_result)
-
-    def setUp(self):
-        """
-        Create instances for testing.
-        """
-        self.r1 = Rectangle(10, 7, 2, 8)
-        self.r2 = Rectangle(2, 4)
-        self.s1 = Square(10, 7, 2, 8)
-        self.s2 = Square(2)
-
-    def tearDown(self):
-        """
-        Clean up created files after each test.
-        """
-        if os.path.exists("Rectangle.json"):
-            os.remove("Rectangle.json")
-        if os.path.exists("Square.json"):
-            os.remove("Square.json")
 
     def test_save_to_file(self):
         """
@@ -337,6 +369,15 @@ class TestBaseClass(unittest.TestCase):
         """
         list_square_output = Square.load_from_file()
         self.assertEqual(list_square_output, [])
+
+    def tearDown(self):
+        """
+        Clean up created files after each test.
+        """
+        if os.path.exists("Rectangle.json"):
+            os.remove("Rectangle.json")
+        if os.path.exists("Square.json"):
+            os.remove("Square.json")
 
 
 if __name__ == '__main__':
