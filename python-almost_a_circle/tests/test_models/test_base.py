@@ -470,15 +470,6 @@ class TestBaseClass(unittest.TestCase):
         with self.assertRaises(TypeError):
             r2 = Rectangle.create("string")
 
-    def test_create_TypeError_string(self):
-        """
-        Testing instance with set attributes TypeError string
-        """
-        r1 = Rectangle(3, 5, 1)
-        r1_dictionary = r1.to_dictionary()
-        with self.assertRaises(NameError):
-            r2 = Rectangle.create(**betty)
-
     def test_load_rectangle_from_file(self):
         """
         Test the load of the rectangle from the file.
@@ -519,6 +510,49 @@ class TestBaseClass(unittest.TestCase):
         """
         list_square_output = Square.load_from_file()
         self.assertEqual(list_square_output, [])
+
+    def test_load_from_file(self):
+        """
+        Testing list of instances
+        """
+        Base._Base__nb_objects = 0
+        output = StringIO()
+        sys.stdout = output
+        r1 = Rectangle(10, 7, 2, 8)
+        r2 = Rectangle(2, 4)
+        list_rectangles_input = [r1, r2]
+        Rectangle.save_to_file(list_rectangles_input)
+        list_rectangles_output = Rectangle.load_from_file()
+
+        print(list_rectangles_output[0])
+        sys.stdout = sys.__stdout__
+        self.assertEqual(output.getvalue(), "[Rectangle] (1) 2/8 - 10/7\n")
+
+        output = StringIO()
+        sys.stdout = output
+        print(list_rectangles_output[1])
+        sys.stdout = sys.__stdout__
+        self.assertEqual(output.getvalue(), "[Rectangle] (2) 0/0 - 2/4\n")
+        self.assertTrue(type(list_rectangles_output), list)
+
+        output = StringIO()
+        sys.stdout = output
+        s1 = Square(5)
+        s2 = Square(7, 9, 1)
+        list_squares_input = [s1, s2]
+        Square.save_to_file(list_squares_input)
+        list_squares_output = Square.load_from_file()
+
+        print(list_squares_output[0])
+        sys.stdout = sys.__stdout__
+        self.assertEqual(output.getvalue(), "[Square] (5) 0/0 - 5\n")
+
+        output = StringIO()
+        sys.stdout = output
+        print(list_squares_output[1])
+        sys.stdout = sys.__stdout__
+        self.assertEqual(output.getvalue(), "[Square] (6) 9/1 - 7\n")
+        self.assertTrue(type(list_squares_output), list)
 
     def tearDown(self):
         """
