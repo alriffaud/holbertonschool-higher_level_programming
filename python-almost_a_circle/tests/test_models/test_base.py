@@ -4,6 +4,8 @@ Unittest for Base class.
 """
 import unittest
 import os
+import sys
+from io import StringIO
 from models.base import Base
 from models.rectangle import Rectangle
 from models.square import Square
@@ -90,8 +92,8 @@ class TestBaseClass(unittest.TestCase):
 
     def test_id_float(self):
         """Passing float"""
-        b1 = Base(1.2)
-        self.assertEqual(b1.id, 1.2)
+        b1 = Base(2.8)
+        self.assertEqual(b1.id, 2.8)
 
     def test_id_NaN(self):
         """Passing float"""
@@ -103,10 +105,43 @@ class TestBaseClass(unittest.TestCase):
         b1 = Base(float("inf"))
         self.assertEqual(b1.id is float("inf"), False)
 
-    def test_unknown(self):
-        """Testing name error"""
-        with self.assertRaises(NameError):
-            Base(a)
+    def test_to_json_string_len(self):
+        """
+        Testing to_json_string len
+        """
+        r1 = Rectangle(1, 5, 12, 6)
+        dictionary = r1.to_dictionary()
+        json_dictionary = Base.to_json_string([dictionary])
+        self.assertEqual(len(json_dictionary), len(str([{
+            "x": 12, "width": 1, "id": 6, "height": 5, "y": 6}])))
+        self.assertTrue(type(json_dictionary), dict)
+
+    def test_to_json_string_len_square(self):
+        """
+        Testing to_json_string len
+        """
+        r1 = Square(1, 5, 12, 6)
+        dictionary = r1.to_dictionary()
+        json_dictionary = Base.to_json_string([dictionary])
+        self.assertEqual(len(json_dictionary), len(str([{
+            "x": 5, "size": 1, "id": 6, "y": 12}])))
+        self.assertTrue(type(json_dictionary), dict)
+
+    def test_to_json_string_type(self):
+        """
+        Testing to_json_string type
+        """
+        r1 = Rectangle(1, 5, 12, 6)
+        dictionary = r1.to_dictionary()
+        json_dictionary = Base.to_json_string([dictionary])
+        self.assertTrue(type(json_dictionary) is str)
+
+    def test_to_json_string_empty(self):
+        """
+        Testing to_json_string empty
+        """
+        json_dictionary = Base.to_json_string('')
+        self.assertEqual(json_dictionary, '""')
 
     def test_to_json_string_empty_list(self):
         """
@@ -148,6 +183,18 @@ class TestBaseClass(unittest.TestCase):
             )
             self.assertEqual(json.loads(content), json.loads(expected_content))
 
+    def test_save_to_file_len(self):
+        """
+        Testing JSON string rep len
+        """
+        Rectangle.save_to_file([self.r1, self.r2])
+        with open("Rectangle.json") as file:
+            self.assertEqual(
+                    len(file.read()), len(str(
+                        [{"x": 2, "id": 6, "width": 10, "y": 8, "height": 7}, {
+                            "x": 0, "id": 7, "width": 2, "y": 0, "height": 4}]
+                        )))
+
     def test_save_to_file_empty_list(self):
         """
         Test if the method saves an empty list when given an empty list.
@@ -180,6 +227,18 @@ class TestBaseClass(unittest.TestCase):
             )
             self.assertEqual(json.loads(content), json.loads(expected_content))
 
+    def test_save_to_file_len_square(self):
+        """
+        Testing JSON string rep len of the square
+        """
+        Square.save_to_file([self.s1, self.s2])
+        with open("Square.json") as file:
+            self.assertEqual(
+                    len(file.read()), len(str(
+                        [{"x": 7, "id": 8, "size": 10, "y": 2}, {
+                            "x": 4, "id": 7, "size": 2, "y": 0}]
+                        )))
+
     def test_save_to_file_empty_list_square(self):
         """
         Test if the method saves an empty list when given an empty list.
@@ -211,6 +270,36 @@ class TestBaseClass(unittest.TestCase):
             {"y": 0, "x": 0, "id": 2, "width": 2, "height": 4}
         ]
         self.assertEqual(result, expected_result)
+
+    def test_from_json_string(self):
+        """
+        Testing JSON string representation
+        """
+        list_input = [
+            {'id': 23, 'width': 15, 'height': 7},
+            {'id': 14, 'width': 5, 'height': 9}
+        ]
+        json_list_input = Rectangle.to_json_string(list_input)
+        list_output = Rectangle.from_json_string(json_list_input)
+        self.assertEqual(list_output, [{
+            'id': 23, 'width': 15, 'height': 7}, {
+                'id': 14, 'width': 5, 'height': 9}])
+        self.assertTrue(type(list_output), list)
+
+    def test_from_json_string_rec(self):
+        """
+        Testing JSON string representation.
+        """
+        list_input = [
+            {'id': 70, 'size': 1},
+            {'id': 8, 'size': 9}
+        ]
+        json_list_input = Square.to_json_string(list_input)
+        list_output = Square.from_json_string(json_list_input)
+        self.assertEqual(list_output, [{
+            'id': 70, 'size': 1}, {
+                'id': 8, 'size': 9}])
+        self.assertTrue(type(list_output), list)
 
     def test_from_json_string_empty_string(self):
         """
@@ -292,6 +381,31 @@ class TestBaseClass(unittest.TestCase):
         result = Square.from_json_string(json_string)
         self.assertEqual(result, [])
 
+    def test_create(self):
+        """
+        Testing instance with set attributes
+        """
+        Base._Base__nb_objects = 0
+        output = StringIO()
+        sys.stdout = output
+        r1 = Rectangle(3, 5, 1)
+        r1_dictionary = r1.to_dictionary()
+        r2 = Rectangle.create(**r1_dictionary)
+        print(r1)
+        sys.stdout = sys.__stdout__
+        self.assertEqual(output.getvalue(), "[Rectangle] (1) 1/0 - 3/5\n")
+        self.assertTrue(type(r1) == Rectangle)
+
+        output = StringIO()
+        sys.stdout = output
+        r1 = Square(3)
+        r1_dictionary = r1.to_dictionary()
+        r2 = Square.create(**r1_dictionary)
+        print(r1)
+        sys.stdout = sys.__stdout__
+        self.assertEqual(output.getvalue(), "[Square] (3) 0/0 - 3\n")
+        self.assertTrue(type(r1) == Square)
+
     def test_create_rectangle(self):
         """
         Test if the create method correctly creates an instance of Rectangle
@@ -328,6 +442,42 @@ class TestBaseClass(unittest.TestCase):
         with self.assertRaises(ValueError) as exc:
             Base.create(**unsupported_dict)
         self.assertEqual(str(exc.exception), "Unsupported class")
+
+    def test_create_TypeError(self):
+        """
+        Testing instance with set attributes TypeError
+        """
+        r1 = Rectangle(3, 5, 1)
+        r1_dictionary = r1.to_dictionary()
+        with self.assertRaises(TypeError):
+            r2 = Rectangle.create(None)
+
+    def test_create_TypeError_int(self):
+        """
+        Testing instance with set attributes TypeError int
+        """
+        r1 = Rectangle(3, 5, 1)
+        r1_dictionary = r1.to_dictionary()
+        with self.assertRaises(TypeError):
+            r2 = Rectangle.create(1, 2, 3)
+
+    def test_create_TypeError_string(self):
+        """
+        Testing instance with set attributes TypeError string
+        """
+        r1 = Rectangle(3, 5, 1)
+        r1_dictionary = r1.to_dictionary()
+        with self.assertRaises(TypeError):
+            r2 = Rectangle.create("string")
+
+    def test_create_TypeError_string(self):
+        """
+        Testing instance with set attributes TypeError string
+        """
+        r1 = Rectangle(3, 5, 1)
+        r1_dictionary = r1.to_dictionary()
+        with self.assertRaises(NameError):
+            r2 = Rectangle.create(**betty)
 
     def test_load_rectangle_from_file(self):
         """
