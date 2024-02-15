@@ -101,11 +101,6 @@ class TestRectangleClass(unittest.TestCase):
         with self.assertRaises(TypeError):
             r1 = Rectangle(1, 2, float("inf"), 1, 1)
 
-    def test_unknown(self):
-        """unknown parameter"""
-        with self.assertRaises(NameError):
-            r1 = Rectangle(a)
-
     def test_None(self):
         """None parameter"""
         with self.assertRaises(TypeError):
