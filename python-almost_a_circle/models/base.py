@@ -67,3 +67,19 @@ class Base:
         if json_string is None or json_string == "[]":
             return ([])
         return (json.loads(json_string))
+
+    @classmethod
+    def create(cls, **dictionary):
+        """
+        This method returns an instance with all attributes already set.
+        """
+        from models.rectangle import Rectangle
+        from models.square import Square
+        if cls.__name__ == "Rectangle":
+            instance = Rectangle(2, 3)
+        elif cls.__name__ == "Square":
+            instance = Square(2)
+        else:
+            raise ValueError("Unsupported class")
+        instance.update(**dictionary)
+        return (instance)
