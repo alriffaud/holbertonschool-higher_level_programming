@@ -34,7 +34,25 @@ class Base:
         """
         This method returns the JSON string representation of
         list_dictionaries.
+        Parameters:
+        - list_dictionaries: is a list of dictionaries.
         """
         if list_dictionaries is None or list_dictionaries == []:
             return ("[]")
         return (json.dumps(list_dictionaries))
+
+    @classmethod
+    def save_to_file(cls, list_objs):
+        """
+        This method writes the JSON string representation of list_objs to a
+        file.
+        Parameters:
+        - cls: is the class itself.
+        - list_objs: is a list of instances who inherits of Base.
+        """
+        if list_objs is None:
+            list_objs = []
+        filename = "{}.json".format(cls.__name__)
+        json_list = [obj.to_dictionary() for obj in list_objs]
+        with open(filename, 'w', encoding="utf-8") as file:
+            file.write(cls.to_json_string(json_list))
