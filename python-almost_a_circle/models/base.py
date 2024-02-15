@@ -5,6 +5,7 @@ Classes:
 - Base: This class will be the “base” of all other classes in this project.
 """
 import json
+import turtle
 
 
 class Base:
@@ -96,3 +97,49 @@ class Base:
             return (instances)
         except FileNotFoundError:
             return ([])
+
+    @staticmethod
+    def draw(list_rectangles, list_squares):
+        """
+        This method draw rectangles and squares.
+        """
+        screen = turtle.Screen()
+        screen.title("Draw Rectangles and Squares")
+        screen.bgcolor("white")
+
+        def draw_rectangle(rectangle):
+            """
+            This function draw a rectangle.
+            """
+            turtle.penup()
+            turtle.goto(rectangle.x, rectangle.y)
+            turtle.pendown()
+            turtle.color("black")
+            turtle.forward(rectangle.width)
+            turtle.left(90)
+            turtle.forward(rectangle.height)
+            turtle.left(90)
+            turtle.forward(rectangle.width)
+            turtle.left(90)
+            turtle.forward(rectangle.height)
+            turtle.left(90)
+
+        def draw_square(square):
+            """
+            This function draw a square.
+            """
+            turtle.penup()
+            turtle.goto(square.x, square.y)
+            turtle.pendown()
+            turtle.color("black")
+            for _ in range(4):
+                turtle.forward(square.size)
+                turtle.left(90)
+
+        for rectangle in list_rectangles:
+            draw_rectangle(rectangle)
+
+        for square in list_squares:
+            draw_square(square)
+
+        turtle.done()
