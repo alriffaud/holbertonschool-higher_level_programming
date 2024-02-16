@@ -7,6 +7,8 @@ from models.base import Base
 from models.rectangle import Rectangle
 import io
 import unittest.mock
+import sys
+from io import StringIO
 
 
 class TestRectangleClass(unittest.TestCase):
@@ -105,6 +107,13 @@ class TestRectangleClass(unittest.TestCase):
         """None parameter"""
         with self.assertRaises(TypeError):
             r1 = Rectangle(1, 2, None, 1, 1)
+
+    def test_zero(self):
+        """Zero parameter"""
+        with self.assertRaises(ValueError):
+            r1 = Rectangle(0, 3)
+        with self.assertRaises(ValueError):
+            r1 = Rectangle(3, 0)
 
     def test_width_property(self):
         """
@@ -292,6 +301,17 @@ class TestRectangleClass(unittest.TestCase):
             rect.display()
             self.assertEqual(mock_stdout.getvalue(), expected_output)
 
+    def test_display2(self):
+        """
+        This function tests display method.
+        """
+        output = StringIO()
+        sys.stdout = output
+        r1 = Rectangle(2, 2)
+        r1.display()
+        sys.stdout = sys.__stdout__
+        assert output.getvalue() == "##\n##\n"
+
     def test_str_representation(self):
         """
         This function tests __str__ method.
@@ -299,6 +319,17 @@ class TestRectangleClass(unittest.TestCase):
         rect = Rectangle(5, 10, 1, 2, 42)
         expected_str = "[Rectangle] (42) 1/2 - 5/10"
         self.assertEqual(str(rect), expected_str)
+
+    def test_str(self):
+        """
+        This function tests __str__ method.
+        """
+        output = StringIO()
+        sys.stdout = output
+        r1 = Rectangle(8, 15, 2, 13, 10)
+        print(r1)
+        sys.stdout = sys.__stdout__
+        assert output.getvalue() == "[Rectangle] (10) 2/13 - 8/15\n"
 
     def test_display_with_nonzero_dimensions(self):
         """
@@ -350,6 +381,46 @@ class TestRectangleClass(unittest.TestCase):
         self.assertEqual(rect.x, 4)
         self.assertEqual(rect.y, 5)
 
+    def test_update(self):
+        """
+        This function tests update
+        """
+        output = StringIO()
+        sys.stdout = output
+        r1 = Rectangle(10, 10, 10, 10)
+        r1.update(89)
+        r1.update(89, 2)
+        r1.update(89, 2, 3)
+        r1.update(89, 2, 3, 4)
+        r1.update(89, 2, 3, 4, 5)
+        print(r1)
+        sys.stdout = sys.__stdout__
+        assert output.getvalue() == "[Rectangle] (89) 4/5 - 2/3\n"
+
+    def test_update_extra(self):
+        """
+        This function tests update with extra parameters.
+        """
+        output = StringIO()
+        sys.stdout = output
+        r1 = Rectangle(10, 10, 10, 10)
+        r1.update(89, 2, 3, 4, 5, 6, 7)
+        print(r1)
+        sys.stdout = sys.__stdout__
+        assert output.getvalue() == "[Rectangle] (89) 4/5 - 2/3\n"
+
+    def test_update_no_param(self):
+        """
+        This function tests update with no parameters.
+        """
+        output = StringIO()
+        sys.stdout = output
+        r1 = Rectangle(10, 10, 10, 10)
+        r1.update()
+        print(r1)
+        sys.stdout = sys.__stdout__
+        assert output.getvalue() == "[Rectangle] (1) 10/10 - 10/10\n"
+
     def test_update_with_kwargs_only(self):
         """
         This function tests update with keyword arguments only.
@@ -373,6 +444,18 @@ class TestRectangleClass(unittest.TestCase):
         self.assertEqual(rect.height, 16)
         self.assertEqual(rect.x, 4)
         self.assertEqual(rect.y, 5)
+
+    def test_kwargs_extra_keys(self):
+        """
+        This function tests kwargs with extra keys.
+        """
+        output = StringIO()
+        sys.stdout = output
+        r1 = Rectangle(10, 10, 10, 10)
+        r1.update(x=1, height=2, y=3, width=4, betty=88)
+        print(r1)
+        sys.stdout = sys.__stdout__
+        assert output.getvalue() == "[Rectangle] (1) 1/3 - 4/2\n"
 
     def test_update_without_args_and_kwargs(self):
         """
@@ -426,6 +509,20 @@ class TestRectangleClass(unittest.TestCase):
         rectangle.update(8, 3, 4, 5, 6)
         expected_dict = {'id': 8, 'width': 3, 'height': 4, 'x': 5, 'y': 6}
         self.assertEqual(rectangle.to_dictionary(), expected_dict)
+
+    def test_to_dict_rep_update(self):
+        """
+        This function tests the dictionary representation update.
+        """
+        output = StringIO()
+        sys.stdout = output
+        r1 = Rectangle(10, 2, 1, 9)
+        r1_dictionary = r1.to_dictionary()
+        r2 = Rectangle(1, 1)
+        r2.update(**r1_dictionary)
+        print(r2)
+        sys.stdout = sys.__stdout__
+        self.assertEqual(output.getvalue(), "[Rectangle] (1) 1/9 - 10/2\n")
 
 
 if __name__ == '__main__':
