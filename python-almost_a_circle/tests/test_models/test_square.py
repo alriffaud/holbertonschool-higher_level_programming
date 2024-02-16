@@ -3,13 +3,21 @@
 Unittest for Square class.
 """
 import unittest
+from models.base import Base
 from models.square import Square
+import sys
+from io import StringIO
 
 
 class TestSquareClass(unittest.TestCase):
     """
     This class tests the Square class
     """
+    def setUp(self):
+        """
+        This function resets nb_objects
+        """
+        Base._Base__nb_objects = 0
 
     def test_constructor(self):
         """
@@ -22,6 +30,31 @@ class TestSquareClass(unittest.TestCase):
         self.assertEqual(square.y, 0)
         self.assertIsNotNone(square.id)
 
+    def test_id(self):
+        """
+        This function prints out the id
+        """
+        s1 = Square(5)
+        self.assertEqual(s1.id, 1)
+
+        s2 = Square(3)
+        self.assertEqual(s2.id, 2)
+
+        s3 = Square(10, 0, 0, 12)
+        self.assertEqual(s3.id, 12)
+        self.assertTrue(type(s3), Square)
+
+    def test_all_param(self):
+        """
+        This function tests the initialization passing all parameters.
+        """
+        square = Square(1, 2, 3, 4)
+        self.assertEqual(square.width, 1)
+        self.assertEqual(square.height, 1)
+        self.assertEqual(square.x, 2)
+        self.assertEqual(square.y, 3)
+        self.assertIsNotNone(square.id)
+
     def test_init_with_negative_values(self):
         """
         This function tests initialization with negative size value.
@@ -29,6 +62,12 @@ class TestSquareClass(unittest.TestCase):
         with self.assertRaises(ValueError) as exc:
             Square(-5)
         self.assertEqual(str(exc.exception), "width must be > 0")
+        with self.assertRaises(ValueError) as exc:
+            r1 = Square(1, -1, 1, 1)
+        self.assertEqual(str(exc.exception), "x must be >= 0")
+        with self.assertRaises(ValueError) as exc:
+            r1 = Square(1, 2, -3)
+        self.assertEqual(str(exc.exception), "y must be >= 0")
 
     def test_init_with_zero_value(self):
         """
@@ -37,6 +76,17 @@ class TestSquareClass(unittest.TestCase):
         with self.assertRaises(ValueError) as exc:
             Square(0)
         self.assertEqual(str(exc.exception), "width must be > 0")
+
+    def test_string(self):
+        """
+        This function tests initialization passing a string.
+        """
+        with self.assertRaises(TypeError):
+            r1 = Square("string")
+        with self.assertRaises(TypeError):
+            r1 = Square(1, "2")
+        with self.assertRaises(TypeError):
+            r1 = Square(1, 2, "3")
 
     def test_init_with_empty_value(self):
         """
@@ -51,6 +101,29 @@ class TestSquareClass(unittest.TestCase):
         """
         with self.assertRaises(TypeError) as exc:
             Square(None)
+        self.assertEqual(str(exc.exception), "width must be an integer")
+
+    def test_excess_param(self):
+        """Excess parameters"""
+        with self.assertRaises(TypeError):
+            r1 = Square(1, 1, 1, 1, 1, 1)
+
+    def test_float(self):
+        """Float parameter"""
+        with self.assertRaises(TypeError) as exc:
+            r1 = Square(1.2)
+        self.assertEqual(str(exc.exception), "width must be an integer")
+
+    def test_NaN(self):
+        """NaN parameter"""
+        with self.assertRaises(TypeError) as exc:
+            r1 = Square(float("nan"))
+        self.assertEqual(str(exc.exception), "width must be an integer")
+
+    def test_inf(self):
+        """inf parameter"""
+        with self.assertRaises(TypeError) as exc:
+            r1 = Square(float("inf"))
         self.assertEqual(str(exc.exception), "width must be an integer")
 
     def test_size_property(self):
