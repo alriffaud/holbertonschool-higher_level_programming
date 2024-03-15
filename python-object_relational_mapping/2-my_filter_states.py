@@ -7,7 +7,9 @@ import MySQLdb
 from sys import argv
 
 def main(argv):
-
+    """
+        Function main
+    """
     if len(argv) - 1 != 4:
         print("Must enter 4 arguments")
         return
