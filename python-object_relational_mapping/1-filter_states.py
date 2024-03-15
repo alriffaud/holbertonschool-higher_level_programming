@@ -5,9 +5,9 @@ from the database hbtn_0e_0_usa:
 """
 
 if __name__ == "__main__":
+    import MySQLdb
+    from sys import argv
     try:
-        import MySQLdb
-        from sys import argv
         db = MySQLdb.connect(
                                 host="localhost",
                                 port=3306,
