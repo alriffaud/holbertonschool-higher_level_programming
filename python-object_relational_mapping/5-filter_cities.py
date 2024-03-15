@@ -15,10 +15,13 @@ if __name__ == "__main__":
                             db=argv[3],
                             )
     cur = db.cursor()
-    cur.execute("SELECT GROUP_CONCAT(cities.name SEPARATOR ', ') FROM cities\
-                JOIN states ON cities.state_id = states.id\
-                WHERE states.name = %s ORDER BY cities.id ASC", (argv[4],))
-    if cur.fetchall():
-        print(cur.fetchone()[0])
+    cur.execute("SELECT cities.name FROM cities\
+                INNER JOIN states ON cities.state_id = states.id\
+                WHERE states.name = %s ORDER BY cities.id", (argv[4],))
+    list = []
+    for cities in cur.fetchall():
+        for name in cities:
+            list.append(name)
+    print(", ".join(list))
     cur.close()
     db.close()
