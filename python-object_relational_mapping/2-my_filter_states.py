@@ -12,7 +12,8 @@ if __name__ == "__main__":
                             port=3306,
                             user=argv[1],
                             password=argv[2],
-                            db=argv[3]
+                            db=argv[3],
+                            charset="utf8"
                             )
     cur = db.cursor()
     cur.execute("SELECT *\
@@ -21,6 +22,7 @@ if __name__ == "__main__":
                 LIKE BINARY '{}'\
                 ORDER BY id ASC".format(argv[4]))
     for row in cur.fetchall():
-        print(row)
+        if row[1] == search:
+            print(argv[4])
     cur.close()
     db.close()
