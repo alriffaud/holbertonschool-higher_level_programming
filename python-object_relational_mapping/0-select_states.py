@@ -6,6 +6,7 @@ Write a script that lists all states from the database hbtn_0e_0_usa.
 
 if __name__ == "__main__":
     import MySQLdb
+    import sys
     from sys import argv
     try:
         db = MySQLdb.connect(
@@ -22,4 +23,4 @@ if __name__ == "__main__":
         cur.close()
         db.close()
     except Exception:
-        pass
+        sys.exit(1)
