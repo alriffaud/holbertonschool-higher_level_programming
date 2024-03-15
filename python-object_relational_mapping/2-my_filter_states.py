@@ -6,6 +6,7 @@ table of hbtn_0e_0_usa where name matches the argument.
 import MySQLdb
 from sys import argv
 
+
 def main(argv):
     """
         Function main
