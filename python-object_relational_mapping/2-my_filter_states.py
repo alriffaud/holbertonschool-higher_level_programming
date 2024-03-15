@@ -21,11 +21,9 @@ def main(argv):
                          port=3306)
     cur = db.cursor()
     cur.execute("SELECT * FROM states WHERE name = '{}'".format(argv[4]))
-
     for row in cur.fetchall():
         if row[1] == argv[4]:
             print(row)
-
     db.close()
 
 
