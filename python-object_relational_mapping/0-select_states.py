@@ -25,5 +25,5 @@ if __name__ == "__main__":
             print(row)
         cur.close()
         db.close()
-    except Exception:
-        sys.exit(1)
+    except Exception as e:
+        print("ERROR: {}".format(e))
