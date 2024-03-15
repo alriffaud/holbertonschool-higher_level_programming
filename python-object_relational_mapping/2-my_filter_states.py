@@ -22,7 +22,7 @@ if __name__ == "__main__":
                 LIKE BINARY '{}'\
                 ORDER BY id ASC".format(argv[4]))
     for row in cur.fetchall():
-        if row[1] == search:
-            print(argv[4])
+        if row[1] == argv[4]:
+            print(row)
     cur.close()
     db.close()
