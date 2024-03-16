@@ -16,7 +16,7 @@ if __name__ == "__main__":
                 {}".format(username, password, database), pool_pre_ping=True)
     Session = sessionmaker(bind=engine)
     session = Session()
-    states = session.query(State).order_by(State.id).order_by(State.id).all()
+    states = session.query(State).order_by(State.id)
     for row in states:
         print("{}: {}".format(row.id, row.name))
     session.close()
