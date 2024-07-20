@@ -30,13 +30,13 @@ guillaume@ubuntu:~/py/$
 ### [1. Print integer](./3-print_number.py)
 Complete this source code in order to print the integer stored in the variable number, followed by Battery street, followed by a new line.
 
-*  You can find the source code here
+*  You can find the source code [here](https://github.com/hs-hq/0x00.py/blob/main/3-print_number.py)
 *  The output of the script should be:
     *  the number, followed by Battery street,
     *  followed by a new line
 *  You are not allowed to cast the variable number into a string
 *  Your code must be 3 lines long
-*  You have to use f-strings tips
+*  You have to use f-strings [tips](https://realpython.com/python-f-strings/)
 
 ```sh
 guillaume@ubuntu:~/py/0x00$ ./3-print_number.py
@@ -48,7 +48,7 @@ guillaume@ubuntu:~/py/0x00$
 ### [2. Print float](./4-print_float.py)
 Complete the source code in order to print the float stored in the variable number with a precision of 2 digits.
 
-*  You can find the source code here
+*  You can find the source code [here](https://github.com/hs-hq/0x00.py/blob/main/4-print_float.py)
 *  The output of the program should be:
     *  Float:, followed by the float with only 2 digits
     *  followed by a new line
@@ -63,9 +63,9 @@ guillaume@ubuntu:~/py/0x00$
 
 
 ### [3. Print string](./5-print_string.py)
-Complete this source code in order to print 3 times a string stored in the variable str, followed by its first 9 characters.
+Complete this [source code](https://github.com/hs-hq/0x00.py/blob/main/5-print_string.py) in order to print 3 times a string stored in the variable str, followed by its first 9 characters.
 
-*  You can find the source code here
+*  You can find the source code [here](https://github.com/hs-hq/0x00.py/blob/main/5-print_string.py)
 *  The output of the program should be:
     *  3 times the value of str
     *  followed by a new line
