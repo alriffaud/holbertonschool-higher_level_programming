@@ -83,9 +83,9 @@ guillaume@ubuntu:~/py/$
 
 
 ### [4. Play with strings](./6-concat.py)
-Complete this source code to print Welcome to Holberton School!
+Complete this [source code](https://github.com/hs-hq/0x00.py/blob/main/6-concat.py) to print Welcome to Holberton School!
 
-*  You can find the source code here
+*  You can find the source code [here](https://github.com/hs-hq/0x00.py/blob/main/6-concat.py)
 *  You are not allowed to use any loops or conditional statements.
 *  You have to use the variables str1 and str2 in your new line of code
 *  Your program should be exactly 5 lines long
@@ -100,9 +100,9 @@ guillaume@ubuntu:~/py/$
 
 
 ### [5. Copy - Cut - Paste](./7-edges.py)
-Complete this source code
+Complete this [source code](https://github.com/hs-hq/0x00.py/blob/main/7-edges.py)
 
-*  You can find the source code here
+*  You can find the source code [here](https://github.com/hs-hq/0x00.py/blob/main/7-edges.py)
 *  You are not allowed to use any loops or conditional statements
 *  Your program should be exactly 8 lines long
 *  word_first_3 should contain the first 3 letters of the variable word
@@ -121,9 +121,9 @@ guillaume@ubuntu:~/py/$
 
 
 ### [6. Create a new sentence](./8-concat_edges.py)
-Complete this source code to print object-oriented programming with Python, followed by a new line.
+Complete this [source code](https://github.com/hs-hq/0x00.py/blob/main/8-concat_edges.py) to print object-oriented programming with Python, followed by a new line.
 
-*  You can find the source code here
+*  You can find the source code [here](https://github.com/hs-hq/0x00.py/blob/main/8-concat_edges.py)
 *  You are not allowed to use any loops or conditional statements
 *  Your program should be exactly 5 lines long
 *  You are not allowed to create new variables
