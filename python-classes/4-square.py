@@ -16,8 +16,8 @@ class Square:
     def __init__(self, size=0):
         """
         This is the initialization method.
-        Parameters:
-          - size: This is the size of the square.
+        Args:
+            size (int): This is the size of the square.
         """
         if not isinstance(size, int):
             raise TypeError("size must be an integer")
@@ -43,6 +43,8 @@ class Square:
     def size(self, value):
         """
         This method sets the value of size.
+        Args:
+            value (int): This is the new size value.
         """
         if not isinstance(value, int):
             raise TypeError("size must be an integer")
