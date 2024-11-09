@@ -24,8 +24,8 @@ class Square:
     def __init__(self, size=0, position=(0, 0)):
         """
         This is the initialization method.
-        Parameters:
-          - size: This is the size of the square.
+        Args:
+            size (int): This is the size of the square.
         """
         if not isinstance(size, int):
             raise TypeError("size must be an integer")
@@ -55,6 +55,8 @@ class Square:
     def size(self, value):
         """
         This method sets the value of size.
+        Args:
+            value (int): This is the new size value.
         """
         if not isinstance(value, int):
             raise TypeError("size must be an integer")
@@ -74,6 +76,8 @@ class Square:
     def position(self, value):
         """
         This method sets the position of the square.
+        Args:
+            value (int): This is the new position value.
         """
         if len(value) != 2 or not all(isinstance(element, int) and
                                       element >= 0 for element in value):
